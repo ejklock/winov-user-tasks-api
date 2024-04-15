@@ -15,6 +15,8 @@ use Vyuldashev\LaravelOpenApi\Attributes as OpenApi;
 #[OpenApi\PathItem]
 /**
  * @OA\PathItem(path="/api/tasks")
+ *  @OpenApi\Tag(name="Auth")
+ * 
  */
 class TaskController extends Controller
 {

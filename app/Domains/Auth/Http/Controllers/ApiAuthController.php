@@ -11,7 +11,8 @@ use Illuminate\Routing\Controller;
 
 #[OpenApi\PathItem]
 /**
- * @OA\PathItem(path="/api/auth")
+ * @OA\PathItem(path="/api/auth")]
+ * @OpenApi\Tag(name="Auth")
  */
 class ApiAuthController extends Controller
 {

@@ -21,7 +21,7 @@
                 },
                 "security": [
                     {
-                        "sanctum": []
+                        "jwt": []
                     }
                 ]
             },
@@ -64,7 +64,7 @@
                 },
                 "security": [
                     {
-                        "sanctum": []
+                        "jwt": []
                     }
                 ]
             }
@@ -209,7 +209,7 @@
                 },
                 "security": [
                     {
-                        "sanctum": []
+                        "jwt": []
                     }
                 ]
             },
@@ -240,7 +240,7 @@
                 },
                 "security": [
                     {
-                        "sanctum": []
+                        "jwt": []
                     }
                 ]
             }
@@ -248,7 +248,7 @@
     },
     "components": {
         "securitySchemes": {
-            "sanctum": {
+            "jwt": {
                 "type": "apiKey",
                 "description": "Enter token in format (Bearer <token>)",
                 "name": "Authorization",
