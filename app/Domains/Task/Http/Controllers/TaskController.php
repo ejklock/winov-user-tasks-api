@@ -32,8 +32,7 @@ class TaskController extends Controller
     {
         try {
             return new TaskResourceCollection(
-                TaskService::listTasksByUser(auth()->user()->id),
-                $request->page
+                TaskService::listTasksByUser(auth()->user()->id, $request->page, $request->per_page),
             );
         } catch (\Throwable $th) {
             return ResponseHelper::error(
