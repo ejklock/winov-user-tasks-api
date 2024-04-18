@@ -38,7 +38,8 @@ class ApiAuthController extends Controller
     {
         try {
             AuthService::registerUser($request->name, $request->email, $request->password);
-            return ResponseHelper::success('User created successfully', null, 201);
+            $token = AuthService::loginUser($request->email, $request->password);
+            return ResponseHelper::success('User created successfully', $token, 201);
         } catch (\Throwable $th) {
 
             return ResponseHelper::error($th->getMessage(), null, $th->getCode());

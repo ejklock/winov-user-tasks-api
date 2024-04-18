@@ -73,6 +73,7 @@ class TaskController extends Controller
                 201
             );
         } catch (\Throwable $th) {
+            dd($th);
             return ResponseHelper::error(
                 $th->getMessage(),
                 null,
@@ -150,6 +151,7 @@ class TaskController extends Controller
                 201
             );
         } catch (\Throwable $th) {
+            dd($th);
             return ResponseHelper::error(
                 $th->getMessage(),
                 null,

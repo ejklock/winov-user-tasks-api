@@ -39,7 +39,7 @@ class AuthService
     public static function loginUser(string $email, string $password)
     {
         if (!$token = auth()->attempt(['email' => $email, 'password' => $password])) {
-            throw new AuthFailedException();
+            throw new AuthFailedException('Invalid credentials', 401);
         }
 
         return self::generateTokenResponse($token);

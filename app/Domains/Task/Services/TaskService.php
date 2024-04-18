@@ -38,13 +38,13 @@ class TaskService
      * @param string $description The description of the task.
      * @return Task The newly created task.
      */
-    public static function createTask(int $userId, string $title, string $description)
+    public static function createTask(int $userId, string $title, string $description = null)
     {
         try {
             return Task::create([
                 'user_id' => $userId,
                 'title' => $title,
-                'description' => $description,
+                'description' => $description ?? '',
             ]);
         } catch (\Throwable $th) {
             throw new CreateEntityException($th->getMessage());
@@ -63,12 +63,12 @@ class TaskService
     }
 
 
-    public static function updateTask(int $taskId, string $title, string $description)
+    public static function updateTask(int $taskId, string $title, string $description = null)
     {
         try {
             return Task::where('id', $taskId)->update([
                 'title' => $title,
-                'description' => $description
+                'description' => $description ?? ''
             ]);
         } catch (\Throwable $th) {
 
