@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->string('title');
-            $table->text('description');
-            $table->timestamp('completed_at')->nullable();
+            $table->text('description')->nullable();
+            $table->dateTime('due_date');
             $table->timestamps();
         });
     }

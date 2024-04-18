@@ -2,6 +2,8 @@
 
 namespace App\Domains\Task\Models;
 
+use App\Domains\User\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
@@ -16,8 +18,9 @@ class Task extends Model
         'user_id',
         'title',
         'description',
-        'completed_at',
+        'due_date',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -32,6 +35,11 @@ class Task extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'completed_at' => 'datetime',
+        'due_date' => 'datetime:Y-m-d\TH:i:s',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

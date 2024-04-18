@@ -41,7 +41,6 @@ class AuthService
         if (!$token = auth()->attempt(['email' => $email, 'password' => $password])) {
             throw new AuthFailedException('Invalid credentials', 401);
         }
-
         return self::generateTokenResponse($token);
     }
 
@@ -61,7 +60,6 @@ class AuthService
 
     private static function generateTokenResponse($token, $type = 'bearer')
     {
-
         return [
             'access_token' => $token,
             'token_type' => $type,

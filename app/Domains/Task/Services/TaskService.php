@@ -38,13 +38,14 @@ class TaskService
      * @param string $description The description of the task.
      * @return Task The newly created task.
      */
-    public static function createTask(int $userId, string $title, string $description = null)
+    public static function createTask(int $userId, string $title, string $dueDate, string $description = null)
     {
         try {
             return Task::create([
                 'user_id' => $userId,
+                'due_date' => $dueDate,
                 'title' => $title,
-                'description' => $description ?? '',
+                'description' => $description,
             ]);
         } catch (\Throwable $th) {
             throw new CreateEntityException($th->getMessage());
@@ -63,27 +64,16 @@ class TaskService
     }
 
 
-    public static function updateTask(int $taskId, string $title, string $description = null)
+    public static function updateTask(int $taskId, string $title,  string $dueDate, string $description = null)
     {
         try {
             return Task::where('id', $taskId)->update([
                 'title' => $title,
-                'description' => $description ?? ''
+                'due_date' => $dueDate,
+                'description' => $description
             ]);
         } catch (\Throwable $th) {
 
-            throw new UpdateEntityException($th->getMessage());
-        }
-    }
-
-
-    public static function markTaskAsCompleted(int $taskId, DateTime $completedAt)
-    {
-        try {
-            return Task::where('id', $taskId)->update([
-                'completed_at' => $completedAt
-            ]);
-        } catch (\Throwable $th) {
             throw new UpdateEntityException($th->getMessage());
         }
     }

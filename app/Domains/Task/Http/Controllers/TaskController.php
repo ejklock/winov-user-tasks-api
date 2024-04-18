@@ -3,6 +3,7 @@
 namespace App\Domains\Task\Http\Controllers;
 
 use App\Domains\Task\Http\Requests\StoreTaskRequest;
+use App\Domains\Task\Http\Requests\UpdateTaskRequest;
 use App\Domains\Task\Http\Resources\TaskResourceCollection;
 use App\Domains\Task\Models\Task;
 use App\Domains\Task\Services\TaskService;
@@ -53,6 +54,7 @@ class TaskController extends Controller
      *             required={"title", "description"},
      *             @OA\Property(property="title", type="string", example="Buy milk"),
      *             @OA\Property(property="description", type="string", example="I need to buy milk for breakfast.")
+     *             @OA\Property(property="due_date", type="date", example="2022-01-01")
      *         )
      *     ),
      *     @OA\Response(response="201", description="Task created successfully."),
@@ -68,12 +70,12 @@ class TaskController extends Controller
                 TaskService::createTask(
                     auth()->user()->id,
                     $request->title,
+                    $request->due_date,
                     $request->description
                 ),
                 201
             );
         } catch (\Throwable $th) {
-            dd($th);
             return ResponseHelper::error(
                 $th->getMessage(),
                 null,
@@ -135,6 +137,7 @@ class TaskController extends Controller
      *             required={"title", "description"},
      *             @OA\Property(property="title", type="string", example="Buy milk"),
      *             @OA\Property(property="description", type="string", example="I need to buy milk for breakfast.")
+     *             @OA\Property(property="due_date", type="date", example="2022-01-01")
      *         )
      *     ),
      *     @OA\Response(response="201", description="Task updated successfully."),
@@ -142,16 +145,15 @@ class TaskController extends Controller
      *     @OA\Response(response="500", description="Internal server error.")
      * )/**/
 
-    public function update(Task $task, StoreTaskRequest $request)
+    public function update(Task $task, UpdateTaskRequest $request)
     {
         try {
             return ResponseHelper::success(
                 'Task updated successfully',
-                TaskService::updateTask($task->id, $request->title, $request->description),
+                TaskService::updateTask($task->id, $request->title, $request->due_date, $request->description),
                 201
             );
         } catch (\Throwable $th) {
-            dd($th);
             return ResponseHelper::error(
                 $th->getMessage(),
                 null,
